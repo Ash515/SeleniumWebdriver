@@ -21,7 +21,13 @@ driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
 // WebDriverWait wait = new WebDriverWait(driver, 20);
 // WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("submitform")));
 
+//Get and print the webpage title
+String title = driver.getTitle();
+System.out.println(title);
+
+//maximize the screen
 driver.manage().window().maximize();
+
 driver.findElement(By.name("username")).sendKeys("Ashwin");
 driver.findElement(By.xpath("//input[@id='dob']")).sendKeys("29/10/2000");
 
@@ -30,10 +36,15 @@ WebElement dropelement=driver.findElement(By.tagName("select"));
 dropelement.findElement(By.xpath("//option[. ='America']")).click();
 
 //Alternative Approach of dropdown element slection
-// WebElement dropdown = driver.findElement(By.id("selenium_commands"));
-// dropdown.findElement(By.xpath("//option[. = 'Browser Commands']")).click();
-// Select s=new Select(dropelement);
-// s.selectByValue("1");
+/**WebElement dropdown = driver.findElement(By.id("selenium_commands"));
+Select s=new Select(dropdown);
+s.selectByIndex("1");
+**/
+
+WebElement genderselect = driver.findElement(By.id("gender"));
+Select fs=  new Select(genderselect);
+fs.selectByValue("male");
+
 
 driver.findElement(By.xpath("//input[@id='email']")).sendKeys("ashwin@zoho.com");
 driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("ashwein@414");
@@ -43,9 +54,13 @@ driver.findElement(By.name("submitform")).click();
 driver.findElement(By.xpath("//input[@id='email-name']")).sendKeys("Ashwin");
 driver.findElement(By.xpath("//input[@id='email-pass']")).sendKeys("Ashwin789");
 driver.findElement(By.xpath("//input[@name='submittag']")).click();
-
+driver.navigate().back();
 //opening new window and new tab
-driver.switchTo().newWindow(WindowType.WINDOW);
+//driver.switchTo().newWindow(WindowType.WINDOW);
 driver.switchTo().newWindow(WindowType.TAB);
+
+String handle=driver.getWindowHandle();
+System.out.println(handle); //printing the unique window handler ID
+// driver.switchTo().window(handle);
     }
 }
